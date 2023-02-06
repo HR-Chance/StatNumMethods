@@ -76,7 +76,7 @@ def main():
             Ea = 0
         iter = iter + 1
 
-    #mkGraph()
+    mkGraph()
     mkTable()
     print(tabulate(info, headers='keys', tablefmt='fancy_grid'))
 
