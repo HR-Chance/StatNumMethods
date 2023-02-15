@@ -22,6 +22,7 @@ xo2 = None
 xo3 = None
 iter = 1
 iters = [1]
+lam = 1.2
 
 def mkTable():
     global info
@@ -38,8 +39,7 @@ def newError(args=None):
     Ea2.append(tmp[1])
     Ea3.append(tmp[2])
     Ea = tmp.max()
-    Eas.append(Ea)
-    
+    Eas.append(Ea)   
 
 def evalXs(args=None):
     global x1, x2, x3, xo1, xo2, xo3, x1s, x2s, x3s
@@ -47,8 +47,13 @@ def evalXs(args=None):
     xo2 = x2
     xo3 = x3
     x1 = (B[0]-A[0,1]*x2-A[0,2]*x3)/A[0,0]
+    x1 = lam*x1+(1-lam)*xo1
     x2 = (B[1]-A[1,0]*x1-A[1,2]*x3)/A[1,1]
+    x2 = lam*x2+(1-lam)*xo2
     x3 = (B[2]-A[2,0]*x1-A[2,1]*x2)/A[2,2]
+    #x1 = lam*x1+(1-lam)*xo1
+    #x2 = lam*x2+(1-lam)*xo2
+    x3 = lam*x3+(1-lam)*xo3
     x1s.append(x1)
     x2s.append(x2)
     x3s.append(x3)
