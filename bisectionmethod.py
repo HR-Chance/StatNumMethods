@@ -4,7 +4,7 @@ from tabulate import tabulate
 
 # Here are environemental variables
 Ea = 100
-Es = 10
+Es = 0.01
 xus = []
 xls = []
 xrs = []
@@ -23,8 +23,9 @@ x = None
 y = []
 
 def newVal(xVal):
-    newY = 85*xVal-91*np.power(xVal,2)+44*np.power(xVal,3)-8*np.power(xVal,4)+np.power(xVal,5)-26
+    # newY = 85*xVal-91*np.power(xVal,2)+44*np.power(xVal,3)-8*np.power(xVal,4)+np.power(xVal,5)-26
     #newY = 82*xVal-90*np.power(xVal,2)+44*np.power(xVal,3)-8*np.power(xVal,4)+0.7*np.power(xVal,5)-25
+    newY = np.exp(-xVal) - xVal
     return newY
 
 def error(XR, XRO):

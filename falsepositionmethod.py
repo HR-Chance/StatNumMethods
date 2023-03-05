@@ -4,7 +4,7 @@ from tabulate import tabulate
 
 # Here are environemental variables
 Ea = 100
-Es = 0.2
+Es = 0.01
 xus = []
 xls = []
 xrs = []
@@ -21,10 +21,11 @@ info = None
 test = None
 x = None
 y = []
+#newY = 85*xVal-91*np.power(xVal,2)+44*np.power(xVal,3)-8*np.power(xVal,4)+np.power(xVal,5)-26
+#newY = 82*xVal-90*np.power(xVal,2)+44*np.power(xVal,3)-8*np.power(xVal,4)+0.7*np.power(xVal,5)-25
 
 def eval(xVal):
-    newY = 85*xVal-91*np.power(xVal,2)+44*np.power(xVal,3)-8*np.power(xVal,4)+np.power(xVal,5)-26
-    #newY = 82*xVal-90*np.power(xVal,2)+44*np.power(xVal,3)-8*np.power(xVal,4)+0.7*np.power(xVal,5)-25
+    newY = np.exp(-xVal) - xVal
     return newY
 
 def error(XR, XRO):
@@ -58,7 +59,7 @@ def mkGraph():
     plt.show()
 
 def main():
-    global iter, Ea, xus, xls, xrs, eas, evals, xu, xl, xr, test
+    global iter, Ea, eas, xu, xl, xr, test
     xl = 0.5
     xu = 1.0
     xr = xu
@@ -66,15 +67,15 @@ def main():
     while Ea > Es:
         xro = xr
         xr = xu-eval(xu)*(xl-xu)/(eval(xl)-eval(xu))
-        error(xr,xro)
         test = eval(xl)*eval(xr)
-        grepData()
         if test < 0:
             xu = xr
         elif test > 0:
             xl = xr
         else:
             Ea = 0
+        error(xr,xro)
+        grepData()
         iter = iter + 1
 
     #mkGraph()
